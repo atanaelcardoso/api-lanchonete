@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Produtos - Lanchonete</title>
+  <link rel="stylesheet" href="./style.css">
+  <meta name="viewpost" content="width=device-width, initial-scale=1.0">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <h1>Cadastro de Produtos</h1>
+
+  <form id="form-produto">
+    <input type="text" class="nome" id="nome" placeholder="Nome" required>
+    <input type="text" class="categoria" id="categoria" placeholder="Categoria" required>
+    <input type="number" class="preco" id="preco" placeholder="Preço" required>
+    <input type="number" class="estoque" id="estoque" placeholder="Estoque" required>
+    <button type="submit">Salvar</button>
+  </form>
+
+  <h2>Lista de Produtos</h2>
+  <ul id="lista-produtos"></ul>
+
+</body>
+</html>
