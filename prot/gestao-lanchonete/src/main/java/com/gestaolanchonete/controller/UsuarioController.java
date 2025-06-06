@@ -1,46 +1,47 @@
 package com.gestaolanchonete.controller;
 
-import com.gestaolanchonete.DAO.IUsuario;
 import com.gestaolanchonete.model.Usuario;
+import com.gestaolanchonete.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")// Permite acesso de qualquer origem (frontend)
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
-
     @Autowired
-    private IUsuario dao;
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping
     public List<Usuario> listarUsuarios() {
-        return (List<Usuario>) dao.findAll();
+        return usuarioRepository.findAll();
     }
 
     @PostMapping
     public Usuario criarUsuario(@RequestBody Usuario usuario) {
-        return dao.save(usuario);
+        return usuarioRepository.save(usuario);
+    }
+
+    @GetMapping("/{id}")
+    public Usuario buscarUsuario(@PathVariable Long id) {
+        return usuarioRepository.findById(id).orElse(null);
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizarUsuario(@PathVariable int id, @RequestBody Usuario usuarioAtualizado) {
-        Optional<Usuario> optionalUsuario = dao.findById(id);
-        if (optionalUsuario.isPresent()) {
-            Usuario usuario = optionalUsuario.get();
-            usuario.setNome(usuarioAtualizado.getNome());
-            usuario.setCargo(usuarioAtualizado.getCargo());
-            usuario.setLogin(usuarioAtualizado.getLogin());
-            usuario.setSenha(usuarioAtualizado.getSenha());
-            return dao.save(usuario);
-        }
-        return null;
+    public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
+        return usuarioRepository.findById(id)
+                .map(usuario -> {
+                    usuario.setNome(usuarioAtualizado.getNome());
+                   // usuario.setEmail(usuarioAtualizado.getEmail());
+                    return usuarioRepository.save(usuario);
+                })
+                .orElse(null);
     }
 
     @DeleteMapping("/{id}")
-    public void deletarUsuario(@PathVariable int id) {
-        dao.deleteById(id);
+    public void deletarUsuario(@PathVariable Long id) {
+        usuarioRepository.deleteById(id);
     }
 }

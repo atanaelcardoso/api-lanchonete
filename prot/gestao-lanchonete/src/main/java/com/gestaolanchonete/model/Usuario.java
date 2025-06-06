@@ -3,39 +3,56 @@ package com.gestaolanchonete.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "usuarios")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
 
-    @Column(name = "nome", length = 200, nullable = false)
     private String nome;
+    private String categoria;
+    private Double preco;
+    private Integer estoque;
 
-    @Column(name = "cargo", length = 100, nullable = false)
-    private String cargo;
+    public Usuario() {}
 
-    @Column(name = "login", length = 100, nullable = false, unique = true)
-    private String login;
+    public Long getId() {
+        return id;
+    }
 
-    @Column(name = "senha", length = 255, nullable = false)
-    private String senha;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    // Getters e Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getNome() {
+        return nome;
+    }
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public String getCargo() { return cargo; }
-    public void setCargo(String cargo) { this.cargo = cargo; }
+    public String getCategoria() {
+        return categoria;
+    }
 
-    public String getLogin() { return login; }
-    public void setLogin(String login) { this.login = login; }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
-    public String getSenha() { return senha; }
-    public void setSenha(String senha) { this.senha = senha; }
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public Integer getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
+    }
 }
