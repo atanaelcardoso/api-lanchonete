@@ -4,9 +4,10 @@ const Icategoria = document.getElementById('categoria');
 const Ipreco = document.getElementById('preco');
 const Iestoque = document.getElementById('estoque');
 
+
 function cadastrar() {
 
-    fetch('http://localhost:3000/produtos', {
+    fetch('dbc:mysql://localhost:3306/lanchonete', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ Inome, Icategoria, Ipreco, Iestoque })
